@@ -19,12 +19,12 @@ from torch.utils.data import RandomSampler, SequentialSampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 from transformers import PreTrainedTokenizer, ProcessorMixin
 
-from ..utils.dataset import RLHFDataset, collate_fn
+from ..utils.dataset import SodaDataset, collate_fn
 from .config import DataConfig
 
 
 def create_dataloader(config: DataConfig, tokenizer: PreTrainedTokenizer, processor: Optional[ProcessorMixin]) -> None:
-    train_dataset = RLHFDataset(
+    train_dataset = SodaDataset(
         data_path=config.train_files,
         tokenizer=tokenizer,
         processor=processor,
@@ -65,7 +65,7 @@ def create_dataloader(config: DataConfig, tokenizer: PreTrainedTokenizer, proces
         drop_last=True,
     )
 
-    val_dataset = RLHFDataset(
+    val_dataset = SodaDataset(
         data_path=config.val_files,
         tokenizer=tokenizer,
         processor=processor,

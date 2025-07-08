@@ -12,7 +12,7 @@ data:
   rollout_batch_size: 512  # equivalent to verl's data.train_batch_size
   mini_rollout_batch_size: null  # equivalent to verl's data.gen_batch_size
   val_batch_size: 1024
-  format_prompt: ./examples/format_prompt/math.jinja
+  format_prompt: ./examples/format_prompt/soda.jinja
   override_chat_template: null
   shuffle: true
   seed: 1
@@ -40,7 +40,7 @@ worker:
     padding_free: true
     ulysses_size: 1
     model:
-      model_path: Qwen/Qwen2.5-7B-Instruct
+      model_path: /mnt2/devon/LLaMA-Factory/history/qwen2.5-lora-sft-vl/
       enable_gradient_checkpointing: true
       trust_remote_code: false
       freeze_vision_tower: false
@@ -81,14 +81,14 @@ worker:
 
   reward:
     reward_type: batch
-    reward_function: ./examples/reward_function/math.py:compute_score
+    reward_function: ./examples/reward_function/soda.py:compute_score
 
 trainer:
   total_epochs: 15
   max_steps: null
   project_name: easy_r1
-  experiment_name: qwen2_5_7b_math_grpo
-  logger: ["console", "wandb"]
+  experiment_name: qwen2_5_7b_soda_grpo
+  logger: ["console"]
   nnodes: 1
   n_gpus_per_node: 8
   max_try_make_batch: 20  # -1 means no limit
